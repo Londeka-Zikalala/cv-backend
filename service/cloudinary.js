@@ -12,7 +12,7 @@ export const uploadFile = async (fileBuffer) => {
     const uploadStream = cloudinary.uploader.upload_stream(
       {
         resource_type: "auto",
-        folder: "cv-uploads"
+        folder: "uploads"
       },
       (error, result) => {
         if (error) reject(error);
