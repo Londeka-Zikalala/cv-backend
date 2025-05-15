@@ -1,9 +1,15 @@
-import pkg from 'pg';
-const { Pool } = pkg;
+import pgPromise from 'pg-promise';
+import dotenv from 'dotenv';
+dotenv.config();
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: false
-});
+const pgp = pgPromise();
 
-export default pool;
+let useSSL = false;
+let local = process.env.LOCAL || false;
+useSSL = true;
+
+const connectionString = process.env.DATABASE_URL;
+const db = pgp(connectionString);
+db.connect();
+
+export { db, pgp };
